@@ -1,0 +1,25 @@
+body.poetsen-one-regular {
+  font-family: "Poetsen One", sans-serif;
+  background-color: #FDF6EC;
+  color: #3E3C3A;
+}
+
+.navbar {
+  background-color: #EAE3D2;
+  border-bottom: 2px solid #8C8A4B;
+}
+
+.navbar .nav-link {
+  text-transform: uppercase;
+  color: #3E3C3A;
+  font-weight: normal;
+}
+
+.navbar .nav-link:hover {
+  color: #B45F04;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  color: #B45F04;
+}
