@@ -1,25 +1,49 @@
-body.poetsen-one-regular {
+/* Use Poetsen One font across the site */
+body {
   font-family: "Poetsen One", sans-serif;
-  background-color: #FDF6EC;
-  color: #3E3C3A;
+  margin-top: 70px; /* Offset for fixed-top navbar */
+  background-color: #F5F5F5;
 }
 
+/* Navbar styling */
 .navbar {
-  background-color: #EAE3D2;
-  border-bottom: 2px solid #8C8A4B;
+  background-color: #EAE3D2; /* Light clay */
+  border-bottom: 2px solid #8C8A4B; /* Olive green */
 }
 
+/* Navbar links */
 .navbar .nav-link {
   text-transform: uppercase;
-  color: #3E3C3A;
+  color: #000;
   font-weight: normal;
 }
 
 .navbar .nav-link:hover {
-  color: #B45F04;
+  color: #83a8a3;
 }
 
 .navbar .nav-link.active {
   font-weight: bold;
+  color: #83a8a3;
+}
+
+/* Section background colors */
+.bg-section-odd {
+  background-color: #F5F5F5; /* Light gray */
+}
+
+.bg-section-even {
+  background-color: #D2E5E3; /* Muted teal / soft green */
+}
+
+/* Footer styling */
+footer {
+  background-color: #EAE3D2;
+  color: #3E3C3A;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+}
+
+footer a:hover {
   color: #B45F04;
 }

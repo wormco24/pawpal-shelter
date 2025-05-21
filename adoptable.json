@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Luna",
+    "species": "Dog",
+    "breed": "Labrador Mix",
+    "age": "2 years",
+    "description": "Playful and affectionate, loves belly rubs and fetch.",
+    "image": "assets/luna.jpg"
+  },
+  {
+    "name": "Whiskers",
+    "species": "Cat",
+    "breed": "Tabby",
+    "age": "4 years",
+    "description": "Quiet and calm, enjoys lounging in sunny spots.",
+    "image": "assets/whiskers.jpg"
+  },
+  {
+    "name": "Buddy",
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age": "3 years",
+    "description": "Energetic and great with kids. Always ready to play.",
+    "image": "assets/buddy.jpg"
+  },
+  {
+    "name": "Mochi",
+    "species": "Cat",
+    "breed": "Siamese",
+    "age": "1 year",
+    "description": "Curious and chatty. Loves attention and playtime.",
+    "image": "assets/mochi.jpg"
+  },
+  {
+    "name": "Benny",
+    "species": "Dog",
+    "breed": "Beagle",
+    "age": "5 years",
+    "description": "Loyal and friendly, enjoys sniffing out adventures.",
+    "image": "assets/benny.jpg"
+  },
+  {
+    "name": "Ziggy",
+    "species": "Cat",
+    "breed": "Maine Coon",
+    "age": "6 years",
+    "description": "Gentle giant who loves naps and brushing sessions.",
+    "image": "assets/ziggy.jpg"
+  }
+]

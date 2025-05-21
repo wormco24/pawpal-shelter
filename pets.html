@@ -2,69 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Adoptable pets at PawPal Animal Shelter" />
-  <title>Adoptable Pets</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="custom.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pets - PawPal</title>
+
+  <!-- Fonts and CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+  <link href="custom.css" rel="stylesheet" />
 </head>
-<body class="poetsen-one-regular">
+<body class="poetsen-one-regular bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">PawPal</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="pets.html">Adopt</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <!-- Vue header -->
+  <header id="header-component"></header>
 
-<div class="container mt-4">
-  <h1>Adoptable Pets</h1>
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/luna.jpg" class="card-img-top" alt="Luna">
-        <div class="card-body">
-          <h5 class="card-title">Luna</h5>
-          <p class="card-text">Playful Labrador mix, 2 years old.</p>
+  <main>
+    <!-- Title Section -->
+    <section>
+      <div class="container-fluid bg-section-odd">
+        <div class="container py-5 text-center">
+          <h1 class="mb-4">Meet Our Adoptable Pets</h1>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/whiskers.jpg" class="card-img-top" alt="Whiskers">
-        <div class="card-body">
-          <h5 class="card-title">Whiskers</h5>
-          <p class="card-text">Quiet tabby cat, 4 years old.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <img src="images/buddy.jpg" class="card-img-top" alt="Buddy">
-        <div class="card-body">
-          <h5 class="card-title">Buddy</h5>
-          <p class="card-text">Energetic golden retriever, 3 years old.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Pet Cards Section -->
+    <section class="container-fluid bg-section-even">
+      <div class="container py-5" id="adoptable-component">
+        <div class="row g-4" v-if="pets.length">
+          <div class="col-md-4" v-for="pet in pets" :key="pet.name">
+            <div class="card h-100 shadow">
+              <img :src="pet.image" class="card-img-top" :alt="pet.name" />
+              <div class="card-body">
+                <h5 class="card-title">{{ pet.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ pet.species }} • {{ pet.breed }}</h6>
+                <p class="card-text"><strong>Age:</strong> {{ pet.age }}</p>
+                <p class="card-text">{{ pet.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else class="text-center">
+          <p>Loading adoptable pets...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vue footer -->
+  <footer id="footer-component"></footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
