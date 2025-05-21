@@ -1,0 +1,7 @@
+{
+  "name": "pawpal-shelter",
+  "version": "1.0.0",
+  "dependencies": {
+    "contentful": "^11.5.3"
+  }
+}
