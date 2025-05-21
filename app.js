@@ -1,21 +1,31 @@
-// Header component
+// Header Component
 const header = Vue.createApp({
   template: `
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/logo.jpg" alt="Logo" width="30" height="30">
-          PawPal
+          <img src="assets/logo.jpg" alt="Logo" width="30" height="30" />
+          PawPal Shelter
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" :class="{ active: isActive('index.html') }" :aria-current="isActive('index.html') ? 'page' : null" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" :class="{ active: isActive('pets.html') }" :aria-current="isActive('pets.html') ? 'page' : null" href="pets.html">Adopt</a></li>
-            <li class="nav-item"><a class="nav-link" :class="{ active: isActive('about.html') }" :aria-current="isActive('about.html') ? 'page' : null" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" :class="{ active: isActive('contact.html') }" :aria-current="isActive('contact.html') ? 'page' : null" href="contact.html">Contact</a></li>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" :class="{ active: isActive('index.html') }" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" :class="{ active: isActive('pets.html') }" href="pets.html">Pets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" :class="{ active: isActive('about.html') }" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" :class="{ active: isActive('contact.html') }" href="contact.html">Contact</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -29,64 +39,48 @@ const header = Vue.createApp({
 });
 header.mount('#header-component');
 
-// Footer component
+// Footer Component
 const footer = Vue.createApp({
   template: `
-    <div class="container text-center py-4">
-      <p class="mb-1">&copy; {{ currentYear }} PawPal Animal Shelter. All rights reserved.</p>
-      <div>
-        <a href="#" class="me-3 text-decoration-none text-dark"><i class="bi bi-facebook"></i> Facebook</a>
-        <a href="#" class="me-3 text-decoration-none text-dark"><i class="bi bi-instagram"></i> Instagram</a>
-        <a href="#" class="text-decoration-none text-dark"><i class="bi bi-envelope"></i> Email Us</a>
-      </div>
+    <div class="bg-dark text-light py-4 text-center">
+      <p>&copy; 2025 PawPal Shelter. All rights reserved.</p>
     </div>
-  `,
-  data() {
-    return {
-      currentYear: new Date().getFullYear()
-    };
-  }
+  `
 });
 footer.mount('#footer-component');
 
-// Contentful client setup
-const client = contentful.createClient({
-  space: 'msh4gw1fey5r',             
-  accessToken: 'zWETGrXjqOS2Z3eeZqS7CbsboT1tkkNzI5c3yc_b36A'    
-});
-
-// Vue app to render adoptable pets
+// Adoptable Pets Component with Filtering
 const adoptableApp = Vue.createApp({
   data() {
     return {
-      pets: []
+      pets: [],
+      speciesFilter: '',
+      maxAge: null
     };
   },
+  computed: {
+    filteredPets() {
+      return this.pets.filter(pet => {
+        const matchesSpecies =
+          this.speciesFilter === '' || pet.species === this.speciesFilter;
+
+        const petAge = parseInt(pet.age);
+        const matchesAge =
+          !this.maxAge || (petAge && petAge <= this.maxAge);
+
+        return matchesSpecies && matchesAge;
+      });
+    }
+  },
   mounted() {
-    client.getEntries({ content_type: 'pawPalShelter' })
-  .then(response => {
-    console.log('✅ Contentful Response:', response);
-
-    this.pets = response.items.map(item => {
-      const imageUrl = item.fields.image?.fields?.file?.url
-        ? (item.fields.image.fields.file.url.startsWith('//') 
-          ? 'https:' + item.fields.image.fields.file.url 
-          : item.fields.image.fields.file.url)
-        : 'https://via.placeholder.com/400x300?text=No+Image';
-
-      return {
-        name: item.fields.name,
-        species: item.fields.species,
-        breed: item.fields.breed,
-        age: item.fields.age,
-        description: item.fields.description,
-        image: imageUrl
-      };
-    });
-  })
-  .catch(error => {
-    console.error('❌ Error loading pets from Contentful:', error);
-  });
+    fetch('/.netlify/functions/getPets')
+      .then(res => res.json())
+      .then(data => {
+        this.pets = data;
+      })
+      .catch(err => {
+        console.error('Failed to load pets:', err);
+      });
   }
 });
 adoptableApp.mount('#adoptable-component');
