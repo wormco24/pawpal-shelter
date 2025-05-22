@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PawPal Shelter</title>
+  <title>Welcome to PawPal Shelter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
@@ -14,40 +14,42 @@
 <body>
   <header id="header-component"></header>
 
-  <main>
-    <section class="text-center py-5 bg-section-odd">
-      <h1>Welcome to PawPal Shelter</h1>
-      <p>Helping pets find loving homes, one paw at a time.</p>
-      <a href="pets.html" class="btn btn-primary mt-3">Meet Our Pets</a>
-    </section>
+  <!-- Hero Section -->
+  <section class="bg-section-even text-center py-5">
+    <div class="container">
+      <h1 class="mb-4">Find Your Furry Friend</h1>
+      <p class="lead mb-4">At PawPal Shelter, we’re committed to connecting loving pets with caring people.</p>
+      <a href="pets.html" class="btn btn-success btn-lg">Meet Our Pets</a>
+    </div>
+  </section>
 
-    <section class="bg-section-even py-5">
-      <div class="container">
-        <h2 class="text-center mb-4">Featured Pets</h2>
-        <div id="featured-pets" class="d-flex justify-content-center">
-          <!-- Vue will insert featured pets here -->
-        </div>
-      </div>
-    </section>
-
-    <section class="text-center py-5 bg-section-odd">
+  <!-- How You Can Help Section -->
+  <section class="bg-section-odd py-5">
+    <div class="container text-center">
       <h2 class="mb-4">How You Can Help</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-4 mb-3">
+      <div class="row">
+        <div class="col-md-4">
           <h5>Adopt</h5>
-          <p>Give a pet a forever home and a loving family.</p>
+          <p>Give a pet a loving forever home by adopting one of our furry residents.</p>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4">
           <h5>Volunteer</h5>
-          <p>Join our team and make a difference in an animal’s life.</p>
+          <p>Donate your time to help walk dogs, clean, or assist with events.</p>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4">
           <h5>Donate</h5>
-          <p>Your support helps us provide care, food, and shelter for pets in need.</p>
+          <p>Support our mission through one-time or recurring donations.</p>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- Centered Circular Image with White Border -->
+<div class="text-center my-4">
+  <img src="assets/logoCenter.jpg" alt="PawPal Shelter Logo"
+       class="img-fluid rounded-circle border border-white"
+       style="max-height: 150px; border-width: 5px;" />
+</div>
 
   <footer id="footer-component" class="mt-5"></footer>
 

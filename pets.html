@@ -20,25 +20,28 @@
 
       <!-- Mobile Filter Toggle -->
       <div class="d-md-none mb-4">
-        <button class="btn btn-outline-primary w-100" data-bs-toggle="collapse" data-bs-target="#mobileFilter">
+        <button class="btn btn-outline-primary w-100" data-bs-toggle="collapse" data-bs-target="#mobileFilter" aria-expanded="false" aria-controls="mobileFilter">
           Filter
         </button>
         <div class="collapse mt-2" id="mobileFilter">
           <div class="card p-3">
-            <label for="mobileAge" class="form-label">Max Age: {{ selectedMaxAge }}</label>
-            <input type="range" class="form-range" :max="maxAge" :min="minAge" step="1" v-model="selectedMaxAge" id="mobileAge">
+            <h5 class="my-3">Filter by Age</h5>
+            <label for="mobile-ageRange" class="form-label">Max Age: {{ selectedMaxAge }}</label>
+            <input type="range" id="mobile-ageRange" class="form-range" :min="minAge" :max="maxAge" step="1" v-model="selectedMaxAge" />
 
-            <label for="mobileSpecies" class="form-label mt-3">Species</label>
-            <div v-for="type in availableSpecies" :key="type" class="form-check">
-              <input class="form-check-input" type="checkbox" :id="'mobile-species-' + type" :value="type" v-model="selectedSpecies">
+            <h5 class="my-3">Species</h5>
+            <div v-for="type in availableSpecies" :key="'mobile-species-' + type" class="form-check">
+              <input type="checkbox" class="form-check-input" :id="'mobile-species-' + type" :value="type" v-model="selectedSpecies" />
               <label class="form-check-label" :for="'mobile-species-' + type">{{ type }}</label>
             </div>
 
-            <label for="mobileBreed" class="form-label mt-3">Breed</label>
-            <select id="mobileBreed" class="form-select" v-model="selectedBreed">
+            <h5 class="my-3">Breed</h5>
+            <select class="form-select" v-model="selectedBreed">
               <option value="">All Breeds</option>
-              <option v-for="breed in availableBreeds" :key="breed" :value="breed">{{ breed }}</option>
+              <option v-for="breed in availableBreeds" :key="'mobile-breed-' + breed" :value="breed">{{ breed }}</option>
             </select>
+
+            <button class="btn btn-secondary mt-3" @click="resetFilters">Reset Filters</button>
           </div>
         </div>
       </div>
@@ -47,32 +50,35 @@
         <!-- Sidebar filter -->
         <div class="col-md-3 d-none d-md-block">
           <div class="card p-3">
-            <label for="age" class="form-label">Max Age: {{ selectedMaxAge }}</label>
-            <input type="range" class="form-range" :max="maxAge" :min="minAge" step="1" v-model="selectedMaxAge" id="age">
+            <h5 class="my-3">Filter by Age</h5>
+            <label for="ageRange" class="form-label">Max Age: {{ selectedMaxAge }}</label>
+            <input type="range" id="ageRange" class="form-range" :min="minAge" :max="maxAge" step="1" v-model="selectedMaxAge" />
 
-            <label class="form-label mt-3">Species</label>
-            <div v-for="type in availableSpecies" :key="type" class="form-check">
-              <input class="form-check-input" type="checkbox" :id="type" :value="type" v-model="selectedSpecies">
-              <label class="form-check-label" :for="type">{{ type }}</label>
+            <h5 class="my-3">Species</h5>
+            <div v-for="type in availableSpecies" :key="'sidebar-species-' + type" class="form-check">
+              <input type="checkbox" class="form-check-input" :id="'sidebar-species-' + type" :value="type" v-model="selectedSpecies" />
+              <label class="form-check-label" :for="'sidebar-species-' + type">{{ type }}</label>
             </div>
 
-            <label for="breed" class="form-label mt-3">Breed</label>
-            <select id="breed" class="form-select" v-model="selectedBreed">
+            <h5 class="my-3">Breed</h5>
+            <select class="form-select" v-model="selectedBreed">
               <option value="">All Breeds</option>
-              <option v-for="breed in availableBreeds" :key="breed" :value="breed">{{ breed }}</option>
+              <option v-for="breed in availableBreeds" :key="'sidebar-breed-' + breed" :value="breed">{{ breed }}</option>
             </select>
+
+            <button class="btn btn-secondary mt-3" @click="resetFilters">Reset Filters</button>
           </div>
         </div>
 
-        <!-- Pets + Sort -->
+        <!-- Pet Cards and Sort Menu -->
         <div class="col-md-9">
           <div class="d-flex justify-content-end align-items-center mb-3">
-            <label for="sort" class="me-2">Sort by:</label>
-            <select id="sort" class="form-select w-auto" v-model="sortOption">
+            <label for="sortSelect" class="me-2">Sort by:</label>
+            <select id="sortSelect" class="form-select w-auto" v-model="sortOption">
               <option value="age-asc">Age: Low to High</option>
               <option value="age-desc">Age: High to Low</option>
-              <option value="name-asc">Name: A-Z</option>
-              <option value="name-desc">Name: Z-A</option>
+              <option value="name-asc">Name: A–Z</option>
+              <option value="name-desc">Name: Z–A</option>
             </select>
           </div>
 
@@ -89,12 +95,22 @@
                 </div>
               </div>
             </div>
-            <p v-if="sortedPets.length === 0">No pets match your filters.</p>
+          </div>
+
+          <div v-if="sortedPets.length === 0" class="text-center mt-5">
+            <p class="text-muted">No pets match your current filters.</p>
           </div>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- Centered Circular Image with White Border -->
+<div class="text-center my-4">
+  <img src="assets/logoCenter.jpg" alt="PawPal Shelter Logo"
+       class="img-fluid rounded-circle border border-white"
+       style="max-height: 150px; border-width: 5px;" />
+</div>
 
   <footer id="footer-component" class="mt-5"></footer>
 

@@ -1,7 +1,7 @@
 // Header Component
 const header = Vue.createApp({
   template: `
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <img src="assets/logo.jpg" alt="Logo" width="30" height="30" />
@@ -42,92 +42,115 @@ header.mount('#header-component');
 // Footer Component
 const footer = Vue.createApp({
   template: `
-    <footer>
-      <div class="container text-center py-3">
-        <p>&copy; 2025 PawPal Shelter. All rights reserved.</p>
-      </div>
-    </footer>
+    <div class="bg-section-even text-center py-3">
+      <p class="mb-0">&copy; 2025 PawPal Shelter. All rights reserved.</p>
+    </div>
   `
 });
 footer.mount('#footer-component');
 
-// Main App
-const adoptableApp = Vue.createApp({
-  data() {
-    return {
-      pets: [],
-      selectedMaxAge: 0,
-      selectedSpecies: [],
-      selectedBreeds: [],
-      sortOption: 'age-asc',
-      maxAge: 0,
-      minAge: 0
-    };
-  },
-  computed: {
-    availableSpecies() {
-      const set = new Set();
-      this.pets.forEach(p => {
-        const age = parseInt(p.age);
-        if (!isNaN(age) && age <= this.selectedMaxAge) {
-          set.add(p.species);
+// Adoptable Pets Page
+if (document.getElementById('adoptable-component')) {
+  const adoptableApp = Vue.createApp({
+    data() {
+      return {
+        pets: [],
+        maxAge: 0,
+        selectedMaxAge: 0,
+        selectedSpecies: [],
+        selectedBreed: '',
+        sortOption: 'name-asc'
+      };
+    },
+    computed: {
+      availableSpecies() {
+        const speciesSet = new Set();
+        this.pets.forEach(pet => {
+          if (pet.age <= this.selectedMaxAge) {
+            speciesSet.add(pet.species);
+          }
+        });
+        return [...speciesSet];
+      },
+      availableBreeds() {
+        const breedSet = new Set();
+        this.pets.forEach(pet => {
+          const matchSpecies = this.selectedSpecies.length === 0 || this.selectedSpecies.includes(pet.species);
+          if (pet.age <= this.selectedMaxAge && matchSpecies) {
+            breedSet.add(pet.breed);
+          }
+        });
+        return [...breedSet];
+      },
+      filteredPets() {
+        return this.pets.filter(pet => {
+          const matchAge = pet.age <= this.selectedMaxAge;
+          const matchSpecies = this.selectedSpecies.length === 0 || this.selectedSpecies.includes(pet.species);
+          const matchBreed = this.selectedBreed === '' || pet.breed === this.selectedBreed;
+          return matchAge && matchSpecies && matchBreed;
+        });
+      },
+      sortedPets() {
+        const sorted = [...this.filteredPets];
+        switch (this.sortOption) {
+          case 'name-asc':
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case 'name-desc':
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+          case 'age-asc':
+            sorted.sort((a, b) => a.age - b.age);
+            break;
+          case 'age-desc':
+            sorted.sort((a, b) => b.age - a.age);
+            break;
         }
-      });
-      return [...set].sort();
-    },
-    availableBreeds() {
-      const set = new Set();
-      this.pets.forEach(p => {
-        const age = parseInt(p.age);
-        if (
-          (!this.selectedSpecies.length || this.selectedSpecies.includes(p.species)) &&
-          !isNaN(age) && age <= this.selectedMaxAge
-        ) {
-          set.add(p.breed);
-        }
-      });
-      return [...set].sort();
-    },
-    filteredPets() {
-      return this.pets.filter(pet => {
-        const age = parseInt(pet.age);
-        const matchesAge = !isNaN(age) && age <= this.selectedMaxAge;
-        const matchesSpecies = !this.selectedSpecies.length || this.selectedSpecies.includes(pet.species);
-        const matchesBreed = !this.selectedBreeds.length || this.selectedBreeds.includes(pet.breed);
-        return matchesAge && matchesSpecies && matchesBreed;
-      });
-    },
-    sortedPets() {
-      const sorted = [...this.filteredPets];
-      switch (this.sortOption) {
-        case 'age-asc':
-          sorted.sort((a, b) => parseInt(a.age) - parseInt(b.age));
-          break;
-        case 'age-desc':
-          sorted.sort((a, b) => parseInt(b.age) - parseInt(a.age));
-          break;
-        case 'name-asc':
-          sorted.sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case 'name-desc':
-          sorted.sort((a, b) => b.name.localeCompare(a.name));
-          break;
+        return sorted;
       }
-      return sorted;
-    }
-  },
-  mounted() {
-    fetch('/.netlify/functions/getPets')
-      .then(res => res.json())
-      .then(data => {
-        this.pets = data;
-
-        const numericAges = this.pets.map(p => parseInt(p.age)).filter(n => !isNaN(n));
-        this.maxAge = Math.max(...numericAges);
-        this.minAge = Math.min(...numericAges);
+    },
+    mounted() {
+      fetch('adoptable.json')
+        .then(res => res.json())
+        .then(data => {
+          this.pets = data.map(pet => ({
+            ...pet,
+            image: `assets/${pet.name}.jpg`
+          }));
+          this.maxAge = Math.max(...this.pets.map(p => p.age));
+          this.selectedMaxAge = this.maxAge;
+        })
+        .catch(err => {
+          console.error('Failed to load pets:', err);
+        });
+    },
+    methods: {
+      resetFilters() {
         this.selectedMaxAge = this.maxAge;
-      })
-      .catch(err => console.error('Failed to load pets:', err));
-  }
-});
-adoptableApp.mount('#adoptable-component');
+        this.selectedSpecies = [];
+        this.selectedBreed = '';
+      }
+    }
+  });
+  adoptableApp.mount('#adoptable-component');
+}
+
+// Homepage Featured Pets
+if (document.getElementById('featured-pets')) {
+  const featured = Vue.createApp({
+    data() {
+      return { pets: [] };
+    },
+    mounted() {
+      fetch('adoptable.json')
+        .then(res => res.json())
+        .then(data => {
+          this.pets = data.slice(0, 3).map(pet => ({
+            ...pet,
+            image: `assets/${pet.name}.jpg`
+          }));
+        });
+    }
+  });
+  featured.mount('#featured-pets');
+}

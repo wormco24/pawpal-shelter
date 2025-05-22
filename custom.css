@@ -1,16 +1,18 @@
-/* Global Styles */
+/* Set Poetsen One font globally */
 body {
   font-family: "Poetsen One", sans-serif;
-  margin-top: 70px; /* Offset for fixed navbar */
-  background-color: #f5f5f5;
+  margin-top: 70px; /* Offset for fixed-top navbar */
+  background-color: #F5F5F5;
+  color: #333;
 }
 
-/* Navbar */
+/* Navbar styling */
 .navbar {
-  background-color: #EAE3D2;
-  border-bottom: 2px solid #8C8A4B;
+  background-color: #EAE3D2; /* Light clay */
+  border-bottom: 2px solid #8C8A4B; /* Olive green */
 }
 
+/* Navbar links */
 .navbar .nav-link {
   text-transform: uppercase;
   color: #000;
@@ -23,56 +25,35 @@ body {
   font-weight: bold;
 }
 
-/* Card Styling */
-.card {
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* Buttons */
-.btn-outline-primary {
-  color: #5b6d5b;
-  border-color: #5b6d5b;
-}
-
-.btn-outline-primary:hover {
-  background-color: #5b6d5b;
-  color: #fff;
-}
-
-/* Forms */
-.form-label {
-  font-weight: bold;
-}
-
-.form-check-label {
-  font-weight: normal;
-}
-
-/* Footer */
-footer {
-  background-color: #EAE3D2;
-  color: #3E3C3A;
-  padding: 1rem 0;
-  font-size: 0.95rem;
-}
-
-footer a:hover {
-  color: #B45F04;
-}
-
-/* Utility */
+/* Section background colors */
 .bg-section-odd {
-  background-color: #F5F5F5;
+  background-color: #F5F5F5; /* Light gray */
 }
 
 .bg-section-even {
-  background-color: #D2E5E3;
+  background-color: #D2E5E3; /* Muted teal / soft green */
 }
 
-/* Responsive Adjustments */
-@media (max-width: 767px) {
-  .form-range {
-    margin-top: 1rem;
-  }
+/* Card components (e.g., filters, pets) */
+.card {
+  font-family: "Poetsen One", sans-serif;
+  border: 1px solid #ccc;
+}
+
+/* Footer styling */
+footer {
+  background-color: #EAE3D2; /* Light earth tone */
+  color: #3E3C3A;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #B45F04; /* Burnt orange accent */
 }
