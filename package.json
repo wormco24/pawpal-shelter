@@ -1,7 +1,14 @@
 {
   "name": "pawpal-shelter",
   "version": "1.0.0",
+  "description": "PawPal Shelter site with Vue, Bootstrap, and Netlify Functions",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev",
+    "build": "echo 'No build step needed for static site'"
+  },
   "dependencies": {
-    "contentful": "^11.5.3"
-  }
+    "contentful": "^11.5.23"
+  },
+  "license": "MIT"
 }

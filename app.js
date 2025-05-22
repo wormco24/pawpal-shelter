@@ -1,7 +1,7 @@
 // Header Component
 const header = Vue.createApp({
   template: `
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <img src="assets/logo.jpg" alt="Logo" width="30" height="30" />
@@ -42,34 +42,78 @@ header.mount('#header-component');
 // Footer Component
 const footer = Vue.createApp({
   template: `
-    <div class="bg-dark text-light py-4 text-center">
-      <p>&copy; 2025 PawPal Shelter. All rights reserved.</p>
-    </div>
+    <footer>
+      <div class="container text-center py-3">
+        <p>&copy; 2025 PawPal Shelter. All rights reserved.</p>
+      </div>
+    </footer>
   `
 });
 footer.mount('#footer-component');
 
-// Adoptable Pets Component with Filtering
+// Main App
 const adoptableApp = Vue.createApp({
   data() {
     return {
       pets: [],
-      speciesFilter: '',
-      maxAge: null
+      selectedMaxAge: 0,
+      selectedSpecies: [],
+      selectedBreeds: [],
+      sortOption: 'age-asc',
+      maxAge: 0,
+      minAge: 0
     };
   },
   computed: {
+    availableSpecies() {
+      const set = new Set();
+      this.pets.forEach(p => {
+        const age = parseInt(p.age);
+        if (!isNaN(age) && age <= this.selectedMaxAge) {
+          set.add(p.species);
+        }
+      });
+      return [...set].sort();
+    },
+    availableBreeds() {
+      const set = new Set();
+      this.pets.forEach(p => {
+        const age = parseInt(p.age);
+        if (
+          (!this.selectedSpecies.length || this.selectedSpecies.includes(p.species)) &&
+          !isNaN(age) && age <= this.selectedMaxAge
+        ) {
+          set.add(p.breed);
+        }
+      });
+      return [...set].sort();
+    },
     filteredPets() {
       return this.pets.filter(pet => {
-        const matchesSpecies =
-          this.speciesFilter === '' || pet.species === this.speciesFilter;
-
-        const petAge = parseInt(pet.age);
-        const matchesAge =
-          !this.maxAge || (petAge && petAge <= this.maxAge);
-
-        return matchesSpecies && matchesAge;
+        const age = parseInt(pet.age);
+        const matchesAge = !isNaN(age) && age <= this.selectedMaxAge;
+        const matchesSpecies = !this.selectedSpecies.length || this.selectedSpecies.includes(pet.species);
+        const matchesBreed = !this.selectedBreeds.length || this.selectedBreeds.includes(pet.breed);
+        return matchesAge && matchesSpecies && matchesBreed;
       });
+    },
+    sortedPets() {
+      const sorted = [...this.filteredPets];
+      switch (this.sortOption) {
+        case 'age-asc':
+          sorted.sort((a, b) => parseInt(a.age) - parseInt(b.age));
+          break;
+        case 'age-desc':
+          sorted.sort((a, b) => parseInt(b.age) - parseInt(a.age));
+          break;
+        case 'name-asc':
+          sorted.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'name-desc':
+          sorted.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+      }
+      return sorted;
     }
   },
   mounted() {
@@ -77,10 +121,13 @@ const adoptableApp = Vue.createApp({
       .then(res => res.json())
       .then(data => {
         this.pets = data;
+
+        const numericAges = this.pets.map(p => parseInt(p.age)).filter(n => !isNaN(n));
+        this.maxAge = Math.max(...numericAges);
+        this.minAge = Math.min(...numericAges);
+        this.selectedMaxAge = this.maxAge;
       })
-      .catch(err => {
-        console.error('Failed to load pets:', err);
-      });
+      .catch(err => console.error('Failed to load pets:', err));
   }
 });
 adoptableApp.mount('#adoptable-component');

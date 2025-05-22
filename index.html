@@ -3,33 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Index - PawPal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="custom.css">
+  <title>PawPal Shelter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="custom.css" />
 </head>
-<body class="poetsen-one-regular bg-light">
 
-<header id="header-component"></header>
+<body>
+  <header id="header-component"></header>
 
-<main>
-  <section class="container-fluid bg-section-odd">
-    <div class="container py-5 text-center">
-      <h1>Welcome to PawPal Animal Shelter</h1>
-      <p class="lead">Helping homeless pets find loving homes.</p>
-      <a href="pets.html" class="btn btn-success btn-lg mt-3">View Adoptable Pets</a>
-    </div>
-  </section>
-</main>
+  <main>
+    <section class="text-center py-5 bg-section-odd">
+      <h1>Welcome to PawPal Shelter</h1>
+      <p>Helping pets find loving homes, one paw at a time.</p>
+      <a href="pets.html" class="btn btn-primary mt-3">Meet Our Pets</a>
+    </section>
 
-<footer id="footer-component"></footer>
+    <section class="bg-section-even py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Featured Pets</h2>
+        <div id="featured-pets" class="d-flex justify-content-center">
+          <!-- Vue will insert featured pets here -->
+        </div>
+      </div>
+    </section>
 
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app.js"></script>
+    <section class="text-center py-5 bg-section-odd">
+      <h2 class="mb-4">How You Can Help</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+          <h5>Adopt</h5>
+          <p>Give a pet a forever home and a loving family.</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Volunteer</h5>
+          <p>Join our team and make a difference in an animal’s life.</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Donate</h5>
+          <p>Your support helps us provide care, food, and shelter for pets in need.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer-component" class="mt-5"></footer>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

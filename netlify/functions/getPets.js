@@ -15,11 +15,11 @@ exports.handler = async function () {
         : null;
 
       return {
-        name: item.fields.name,
-        species: item.fields.species,
-        breed: item.fields.breed,
-        age: item.fields.age,
-        description: item.fields.description,
+        name: item.fields.name || '',
+        species: item.fields.species || '',
+        breed: item.fields.breed || '',
+        age: item.fields.age || '',
+        description: item.fields.description || '',
         image: imageUrl
       };
     });

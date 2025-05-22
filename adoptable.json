@@ -3,7 +3,7 @@
     "name": "Luna",
     "species": "Dog",
     "breed": "Labrador Mix",
-    "age": "2 years",
+    "age": "2",
     "description": "Playful and affectionate, loves belly rubs and fetch.",
     "image": "assets/luna.jpg"
   },
@@ -11,7 +11,7 @@
     "name": "Whiskers",
     "species": "Cat",
     "breed": "Tabby",
-    "age": "4 years",
+    "age": "4",
     "description": "Quiet and calm, enjoys lounging in sunny spots.",
     "image": "assets/whiskers.jpg"
   },
@@ -19,7 +19,7 @@
     "name": "Buddy",
     "species": "Dog",
     "breed": "Golden Retriever",
-    "age": "3 years",
+    "age": "3",
     "description": "Energetic and great with kids. Always ready to play.",
     "image": "assets/buddy.jpg"
   },
@@ -27,7 +27,7 @@
     "name": "Mochi",
     "species": "Cat",
     "breed": "Siamese",
-    "age": "1 year",
+    "age": "1",
     "description": "Curious and chatty. Loves attention and playtime.",
     "image": "assets/mochi.jpg"
   },
@@ -35,7 +35,7 @@
     "name": "Benny",
     "species": "Dog",
     "breed": "Beagle",
-    "age": "5 years",
+    "age": "5",
     "description": "Loyal and friendly, enjoys sniffing out adventures.",
     "image": "assets/benny.jpg"
   },
@@ -43,8 +43,72 @@
     "name": "Ziggy",
     "species": "Cat",
     "breed": "Maine Coon",
-    "age": "6 years",
+    "age": "6",
     "description": "Gentle giant who loves naps and brushing sessions.",
     "image": "assets/ziggy.jpg"
+  },
+  {
+    "name": "Milo",
+    "species": "Dog",
+    "breed": "Beagle",
+    "age": "2",
+    "description": "A playful beagle who loves to follow scents and cuddle up.",
+    "image": "assets/milo.jpg"
+  },
+  {
+    "name": "Zelda",
+    "species": "Cat",
+    "breed": "Siamese",
+    "age": "4",
+    "description": "Elegant and vocal Siamese who loves attention.",
+    "image": "assets/zelda.jpg"
+  },
+  {
+    "name": "Tucker",
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age": "3",
+    "description": "Friendly and loyal, Tucker is great with kids and other pets.",
+    "image": "assets/tucker.jpg"
+  },
+  {
+    "name": "Cleo",
+    "species": "Cat",
+    "breed": "Maine Coon",
+    "age": "5",
+    "description": "Large and fluffy with a calm personality.",
+    "image": "assets/cleo.jpg"
+  },
+  {
+    "name": "Loki",
+    "species": "Dog",
+    "breed": "Husky",
+    "age": "1",
+    "description": "Energetic and vocal husky who needs an active home.",
+    "image": "assets/loki.jpg"
+  },
+  {
+    "name": "Penny",
+    "species": "Cat",
+    "breed": "Tabby",
+    "age": "2",
+    "description": "Sweet and playful tabby who loves chasing toys.",
+    "image": "assets/penny.jpg"
+  },
+  {
+    "name": "Nala",
+    "species": "Cat",
+    "breed": "Bengal",
+    "age": "4",
+    "description": "Active and curious Bengal with beautiful markings.",
+    "image": "assets/nala.jpg"
+  },
+  {
+    "name": "Rocky",
+    "species": "Dog",
+    "breed": "Boxer",
+    "age": "6",
+    "description": "A strong yet gentle boxer who enjoys walks and naps.",
+    "image": "assets/rocky.jpg"
   }
 ]

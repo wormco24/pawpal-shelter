@@ -1,31 +1,19 @@
-/* Base page spacing */
+/* Base spacing */
 .container {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-
-/* Make images in cards scale nicely */
 .card-img-top {
   object-fit: cover;
   height: 250px;
 }
-
-/* Headings consistency */
 h1, h2, h3 {
   margin-bottom: 1rem;
 }
-
-/* Responsive typography */
 @media (max-width: 576px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-  h2 {
-    font-size: 1.4rem;
-  }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
 }
-
-/* Optional: Smooth scrolling behavior */
 html {
   scroll-behavior: smooth;
 }
