@@ -4,7 +4,7 @@ const header = Vue.createApp({
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-          <img src="assets/logo.jpg" alt="Logo" width="30" height="30" />
+          <img src="assets/logoShelter.png" alt="Logo" width="30" height="30" />
           PawPal Shelter
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
